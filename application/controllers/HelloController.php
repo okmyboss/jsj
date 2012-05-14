@@ -6,7 +6,7 @@ class HelloController extends Zend_Controller_Action
     public function init()
     
     {
-    	echo "hello";
+    	echo "hello" . "hello";
         /* Initialize action controller here */
     }
 
