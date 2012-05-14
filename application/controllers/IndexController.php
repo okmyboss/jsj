@@ -5,35 +5,21 @@
  * @author sgboss
  *
  */
-require_once '../application/models/User.php';
+require_once APPLICATION_PATH . '/controllers/BaseController.php';
+require_once APPLICATION_PATH . '/models/User.php';
 
-class IndexController extends Zend_Controller_Action
+class IndexController extends BaseController
 {
-
-	public function init()
-	{
-		$this->_helper->getHelper("layout")->setLayout("layout");
-		
-	}
-
-	/**
-	 * index action test
-	 *
-	 */
+	
 	public function indexAction()
 	{
 		
-		//初始化我们的数据库适配器
-		$url = constant("APPLICATION_PATH") . DIRECTORY_SEPARATOR . "configs/application.ini";
-		$dbconfig = new Zend_Config_Ini($url,"mysql");
-		$db = Zend_Db::factory($dbconfig->db);
-		$db->query("SET NAMES UTF8");
-		Zend_Db_Table::setDefaultAdapter($db);
+		Zend_Dojo::enableView($this->view);
 		
 		$user = new Model_User();
 		$result = $user->fetchAll();
 		
-		print_r($result);
+		//print_r($result->toArray());
 		$this->render('index');
 	}
 

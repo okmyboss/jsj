@@ -12,15 +12,15 @@ Setting Up Your VHOST
 =====================
 
 The following is a sample VHOST you might want to consider for your project.
-
+NameVirtualHost 127.0.0.1
 <VirtualHost *:80>
-   DocumentRoot "/var/www/html/1/public"
-   ServerName 1.local
+   DocumentRoot "/var/www/html/jsj/public"
+   ServerName z1.local
 
    # This should be omitted in the production environment
    SetEnv APPLICATION_ENV development
 
-   <Directory "/var/www/html/1/public">
+   <Directory "/var/www/html/jsj/public">
        Options Indexes MultiViews FollowSymLinks
        AllowOverride All
        Order allow,deny
