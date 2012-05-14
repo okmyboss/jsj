@@ -19,4 +19,11 @@
 	<natures>
 		<nature>org.eclipse.php.core.PHPNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>library/Zend</name>
+			<type>2</type>
+			<location>/home/sgboss/Documents/PHP/Zend</location>
+		</link>
+	</linkedResources>
 </projectDescription>
