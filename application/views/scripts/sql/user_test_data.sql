@@ -1,1 +1,0 @@
-insert into user(name,nickname,height,weight) values ("singleboss","singleboss",100,200);
