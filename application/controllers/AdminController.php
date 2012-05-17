@@ -9,13 +9,12 @@ class AdminController extends BaseController{
 	function init(){
 		parent::initDb();
 		
-		
 		$this->_helper->layout->setLayout('admin');
 	}
 	public function indexAction(){
 		$cate = new Model_Category();
-		$list = $cate->fetchAll()->toArray();
-		
+		$list = $cate->getSortedList();
+		$this->view->list = $list;
 		$json = Zend_Json::encode($list);
 		//echo $json;
 		
