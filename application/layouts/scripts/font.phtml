@@ -1,0 +1,74 @@
+<!DOCTYPE div PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/dojo/1.7/dijit/themes/claro/claro.css" />
+<style type="text/css">
+body, html { font-family:helvetica,arial,sans-serif; font-size:90%; }
+</style>
+
+<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js" djConfig="parseOnLoad: true"></script>
+<script>
+dojo.require("dijit.dijit");
+      //Add Dijit components you are using here using dojo.require
+	
+dojo.addOnLoad(function() {		
+      //JavaScript content here
+});
+</script>
+<script type="text/javascript">
+dojo.require("dijit.layout.BorderContainer");
+dojo.require("dijit.layout.ContentPane");
+</script>
+</head>
+<body class="claro">
+<div style="width: 1000px; height: 1300px; margin:0 auto 0 auto;">
+    <div dojoType="dijit.layout.BorderContainer" style="width: 100%; height: 100%;">
+        <div dojoType="dijit.layout.ContentPane" region="top" splitter="true" style="height:180px;">
+            This is the content in the top section.
+        </div>
+        <div dojoType="dijit.layout.ContentPane" region="top" splitter="true" style="height:180px;">
+            This is the content in the top section.
+        </div>
+        <div dojoType="dijit.layout.ContentPane" region="left" style="width: 200px;" splitter="true">
+            This is the content in the left section.
+        </div>
+        <div dojoType="dijit.layout.ContentPane" region="center" splitter="true">
+            This is the content in the center section.
+        </div>
+        <div dojoType="dijit.layout.ContentPane" region="right" style="width: 100px;" splitter="true">
+            This is the content in the right section.
+        </div>
+        <div dojoType="dijit.layout.ContentPane" region="bottom" splitter="true" style="height:150px;">
+             This is the content in the bottom section.
+         </div>
+     </div>
+</div>
+<script type="text/javascript">
+dojo.require("dojo.fx");
+dojo.require("dojo.fx.easing");
+dojo.ready(function(){
+
+    dojo.query("#showMe2").onclick(function(e){
+
+        dojo.animateProperty({
+            node: e.target,
+            properties:{
+                marginLeft:200
+            },
+            easing: dojo.fx.easing.elasticOut,
+            duration:1200,
+            onEnd: function(n){
+                dojo.anim(n, { marginLeft:2 }, 2000, dojo.fx.easing.bounceOut);
+            }
+        }).play();
+
+    });
+
+});
+</script>
+<div id="showMe2" style="padding: 10px; margin-left:2px;">
+     Click to Animate me with built in easing functions.
+</div>
+<?php echo $this->layout()->content; ?>
+</body>
+</html>

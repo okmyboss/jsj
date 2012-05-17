@@ -1,0 +1,107 @@
+<?php
+// index.phtml 或者其它任意视图
+ 
+// 测试数据，实际情况可以从数据库获取
+$this->posts = array(
+    '1' => array(
+        'postId' => 'id_1',
+        'postTitle' => 'title_1',
+        'postDetail' => 'detail_1',
+    ),
+    '2' => array(
+        'postId' => 'id_2',
+        'postTitle' => 'title_2',
+        'postDetail' => 'detail_2',
+    ),
+    '3' => array(
+        'postId' => 'id_3',
+        'postTitle' => 'title_3',
+        'postDetail' => 'detail_3',
+    ),
+    '4' => array(
+        'postId' => 'id_4',
+        'postTitle' => 'title_4',
+        'postDetail' => 'detail_4',
+    ),
+    '5' => array(
+        'postId' => 'id_5',
+        'postTitle' => 'title_5',
+        'postDetail' => 'detail_5',
+    ),
+    '6' => array(
+        'postId' => 'id_6',
+        'postTitle' => 'title_6',
+        'postDetail' => 'detail_6',
+    ),
+);
+ 
+// 设置 Zend_Dojo_View_Helper_Dojo 视图助手
+if (isset($this->posts)) {
+ 
+    // Google Api CDN 路径
+    $cdnPath = 'http://ajax.googleapis.com/ajax/libs/dojo/1.3.1/';
+ 
+    $this->dojo()
+         ->enable()
+ 
+         // 注意我们用的是CDN 1.3.1版
+         ->setCdnVersion('1.3.1')
+ 
+         // 基本 configs
+         ->setDjConfigOption('parseOnLoad', true)
+         ->setDjConfigOption('isDebug', false)
+         ->setDjConfigOption('locale', 'zh')
+ 
+         // 导入一些 css
+         ->registerDojoStylesheet(true)
+         ->addStylesheet($cdnPath . 'dojox/grid/resources/Grid.css')
+         ->addStylesheet($cdnPath . 'dojox/grid/resources/tundraGrid.css')
+         ->addStylesheet($cdnPath . 'dijit/themes/tundra/tundra.css')
+ 
+         // 加载所需的 Dojo 模块
+         ->requireModule('dijit.dijit')
+         ->requireModule('dojox.grid.DataGrid')
+         ->requireModule('dojo.data.ItemFileWriteStore')
+         ->requireModule('dojo.parser')
+         ;
+ 
+    // 输出 Dojo 内容，当然你也可以在 layout 中输出
+    echo $this->dojo();
+ 
+    // 用 Zend_Dojo_Data 组装 Dojo 数据格式，这实际上是 Json 的封装
+    $data = new Zend_Dojo_Data();
+    $data->setIdentifier('postId')
+         ->setLabel('My post list')
+         ->addItems($this->posts);
+ 
+    //var_dump($data);
+?>
+ 
+    <script type="text/javascript">
+        // Dojo 的 addOnLoad 延迟加载
+        dojo.addOnLoad(function() {
+            // 表格 layout 样式
+            var gridLayout = [[
+                {name: 'Post',      field: 'postId',        width: "50px"},
+                {name: 'Title',     field: 'postTitle',     width: "200px"},
+                {name: 'Detail',    field: 'postDetail',    width: "400px"}
+            ]];
+ 
+            // 用于 debug - setDjConfigOption('isDebug', true)
+            //console.log('<?php echo $data; ?>');
+ 
+            // 利用 ItemFileWriteStore 导入数据 data ，这作为一个 dojo store 存储器对象存在
+            var test_store = new dojo.data.ItemFileWriteStore({data: <?php echo $data; ?>});
+ 
+            // 为下面的表格 gridNode 设定好样式 layout 并通过存储器 store 填充数据
+            gridNode.setStructure(gridLayout);
+            gridNode.setStore(test_store);
+        });
+    </script>
+ 
+    <div jsId="gridNode" dojoType="dojox.grid.DataGrid" rowsPerPage="10" 
+        style="width:675px; height:400px;"></div>
+ 
+<?php
+}
+?>

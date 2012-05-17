@@ -7,6 +7,7 @@
  */
 require_once APPLICATION_PATH . '/controllers/BaseController.php';
 require_once APPLICATION_PATH . '/models/User.php';
+require_once APPLICATION_PATH . '/models/Navigate.php';
 
 class IndexController extends BaseController
 {
@@ -16,8 +17,12 @@ class IndexController extends BaseController
 		
 		Zend_Dojo::enableView($this->view);
 		
-		$user = new Model_User();
-		$result = $user->fetchAll();
+		$navigate = new Navigate();
+		
+		$navigate_list = $navigate->fetchAll()->toArray();
+		
+		/* $user = new Model_User();
+		$result = $user->fetchAll(); */
 		
 		//print_r($result->toArray());
 		$this->render('index');
