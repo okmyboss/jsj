@@ -4,6 +4,7 @@
  */
 
 require_once APPLICATION_PATH . '/controllers/BaseController.php';
+require_once APPLICATION_PATH . '/models/Category.php';
 class AdminController extends BaseController{
 	function init(){
 		parent::initDb();
@@ -12,9 +13,13 @@ class AdminController extends BaseController{
 		$this->_helper->layout->setLayout('admin');
 	}
 	public function indexAction(){
+		$cate = new Model_Category();
+		$list = $cate->fetchAll()->toArray();
 		
+		$json = Zend_Json::encode($list);
+		//echo $json;
 		
-		//$this->getResponse()->appendBody("hello","sliderbar" );
+		$this->getResponse()->appendBody($json,"sliderbar" );
 
 	}
 }

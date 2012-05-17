@@ -1,4 +1,5 @@
-#head {
-	float:left;
+.r{
+	float:right;
+	width:100px;
+	height:100%;
 }
-	

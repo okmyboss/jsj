@@ -5,7 +5,7 @@
  *
  */
 
-class Navigate extends Zend_Db_Table
+class Model_Navigate extends Zend_Db_Table
 {
 
 	protected $_name = "navigate";
