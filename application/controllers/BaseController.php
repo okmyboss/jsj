@@ -6,6 +6,7 @@ class BaseController extends Zend_Controller_Action{
 		$this->_helper->layout->setLayout('font');
 	}
 	function initDb(){
+		
 		//初始化数据库适配器
 		$path = constant("APPLICATION_PATH") . DIRECTORY_SEPARATOR . "configs/application.ini";
 		$dbconfig = new Zend_Config_Ini($path,"mysql");
