@@ -33,7 +33,7 @@ class Model_Category extends Zend_Db_Table_Abstract
 		foreach ($place as $key => $value){
 			if ($value['fatherId'] == $self_id){
 				$tmpArray[] = $value;
-				$tmpArray[count($tmpArray) - 1]['childen'] = $this->getChilden($place, $tmpArray[count($tmpArray) - 1]['id']);
+				$tmpArray[count($tmpArray) - 1]['children'] = $this->getChilden($place, $tmpArray[count($tmpArray) - 1]['id']);
 				unset($place[$key]);
 			}
 		}

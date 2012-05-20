@@ -1,0 +1,57 @@
+<script type="text/javascript">
+
+var dojoItems = new Array("dijit.MenuBar","dijit.PopupMenuBarItem","dijit.DropDownMenu","dijit.Menu","dijit.MenuItem");
+
+require_dojo_items(dojoItems);
+
+function getMethodAndPropertys(obj) {
+	  var result = [];
+	  for (var id in obj) {
+	    try {
+	      if (typeof(obj[id]) == "function") {
+	        result.push("function " + id + ": " + obj[id].toString() + "<br /><br />");
+	      }
+	      else {
+	        result.push("property " + id + ": " + obj[id].toString() + "<br /><br />");
+	      }
+	    } catch (err) {
+	      result.push(id + ": inaccessible");
+	    }
+	  }
+	  return result;
+} 
+function getWorkDiv(url){
+	
+	// The parameters to pass to xhrGet, the url, how to handle it, and the callbacks.
+	require(["dojo/_base/xhr", "dojo/parser", "dojo/dom"], function(xhr, parser, dom){
+	    xhr.get({
+	      url: url,
+	      load: function(data){
+	          dom.byId("workFrame").innerHTML = dojo.fromJson(data)['text'];
+
+			  require_dojo_items(dojo.fromJson(data)['RequireDojo']);
+			  
+			  setTimeout(function(){parser.parse("workFrame")},1000);
+	      }
+	    });
+	});
+}
+
+
+</script>
+<div data-dojo-type="dijit.MenuBar" id="navMenu">
+    <div data-dojo-type="dijit.PopupMenuBarItem">
+        <span>分类</span>
+        <div data-dojo-type="dijit.DropDownMenu" id="fileMenu">
+            <div data-dojo-type="dijit.MenuItem" data-dojo-props="onClick:function(){getWorkDiv('http://<?php echo HTTP_HOST; ?>/category/getlist');}">查看所有分类</div>
+            <div data-dojo-type="dijit.MenuItem" data-dojo-props="onClick:function(){alert('file 2');}">添加一个分类</div>
+        </div>
+    </div>
+    <div data-dojo-type="dijit.PopupMenuBarItem">
+        <span>文章</span>
+        <div data-dojo-type="dijit.DropDownMenu" id="editMenu">
+            <div data-dojo-type="dijit.MenuItem" data-dojo-props="onClick:function(){alert('edit 1');}">Edit #1</div>
+            <div data-dojo-type="dijit.MenuItem" data-dojo-props="onClick:function(){alert('edit 2');}">Edit #2</div>
+        </div>
+    </div>
+</div>

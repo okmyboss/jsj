@@ -1,25 +1,36 @@
 <!DOCTYPE div PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/dojo/1.7/dijit/themes/claro/claro.css" />
 <?php echo $this->headLink()->appendStylesheet('/css/style.css') ?>
 
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/dojo/1.7/dijit/themes/claro/claro.css" />
-<style type="text/css">
-body, html { font-family:helvetica,arial,sans-serif; font-size:90%; }
-</style>
-<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js" djConfig="parseOnLoad: true"></script>
-<script>
-dojo.require("dijit.dijit");
-      //Add Dijit components you are using here using dojo.require
-	
-dojo.addOnLoad(function() {		
-      //JavaScript content here
-});
-</script>
+<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js" djConfig="parseOnLoad: true, isDebug: true"></script>
 <script type="text/javascript">
+dojo.require("dijit.dijit");
 dojo.require("dijit.layout.BorderContainer");
 dojo.require("dijit.layout.ContentPane");
-dojo.require("dijit.Calendar");
+dojo.require("dojo.data.ItemFileReadStore");
+dojo.require("dijit.tree.ForestStoreModel");
+
+/*
+dojo.require("dijit.Tree");
+dojo.require("dojo.data.ItemFileReadStore");
+*/
+dojo.addOnLoad(function() {
+	
+});
+function dojoRequire(items){
+	
+}
+function require_dojo_items(items){
+	for(var id in items){
+		try{
+			dojo.require(items[id]);
+		}catch(exception){
+			alert(exception);
+		}
+	}
+}
 </script>
 </head>
 <body class="claro">
@@ -29,41 +40,20 @@ dojo.require("dijit.Calendar");
             欢迎来到后台
             <div class="r"><a href="#" >退出</a></div>
         </div>
+        <div dojoType="dijit.layout.ContentPane" region="top" splitter="true" style="height:30px;">
+            <?php echo $this->layout()->menubar; ?>
+        </div>
         <div dojoType="dijit.layout.ContentPane" region="left" style="width: 210px;" splitter="true">
-            <div dojoType="dijit.Calendar"></div>
+            
         </div>
         <div dojoType="dijit.layout.ContentPane" region="center" splitter="true">
-            <?php echo $this->layout()->content; ?>
+        <div id="workFrame"></div>
+        	
         </div>
         <div dojoType="dijit.layout.ContentPane" region="bottom" splitter="true" style="height:30px;">
-             <div id="showMe2" style="padding: 10px; margin-left:2px;">
-     			Click to Animate me with built in easing functions.
-			 </div>
+             
          </div>
      </div>
 </div>
-<script type="text/javascript">
-dojo.require("dojo.fx");
-dojo.require("dojo.fx.easing");
-dojo.ready(function(){
-
-    dojo.query("#showMe2").onclick(function(e){
-
-        dojo.animateProperty({
-            node: e.target,
-            properties:{
-                marginLeft:200
-            },
-            easing: dojo.fx.easing.elasticOut,
-            duration:1200,
-            onEnd: function(n){
-                dojo.anim(n, { marginLeft:2 }, 2000, dojo.fx.easing.bounceOut);
-            }
-        }).play();
-
-    });
-
-});
-</script>
 </body>
 </html>

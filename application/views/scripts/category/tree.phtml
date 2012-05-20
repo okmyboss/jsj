@@ -1,0 +1,13 @@
+<div data-dojo-type="dojo.data.ItemFileReadStore" data-dojo-id="continentStore" 
+		data-dojo-props="url:'http://<?php echo HTTP_HOST; ?>/category/getjson'"></div>
+
+<div data-dojo-type="dijit.tree.ForestStoreModel" data-dojo-id="continentModel" 
+		data-dojo-props="store:continentStore, query:{description:'hello'},
+ 		rootId:'continentRoot', rootLabel:'hello world', childrenAttrs:'children'"></div>
+
+<div data-dojo-type="dijit.Tree" data-dojo-props="model:continentModel, openOnClick:true">
+  	<script type="dojo/method" data-dojo-event="onClick" data-dojo-args="item">
+    			alert("Execute of node " + continentStore.getLabel(item)
+       	 		+", population=" + continentStore.getValue(item, "population"));
+  	</script>
+</div>

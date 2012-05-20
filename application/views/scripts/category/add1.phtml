@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/dojo/1.7/dijit/themes/claro/claro.css" />
+<?php echo $this->headLink()->appendStylesheet('/css/style.css') ?>
+<style type="text/css">
+body, html { font-family:helvetica,arial,sans-serif; font-size:90%; }
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.2/dojo/dojo.js" djConfig="parseOnLoad: true, isDebug: true"></script>
+<script type="text/javascript">
+dojo.require("dijit.form.Form");
+dojo.require("dijit.form.Button");
+dojo.require("dijit.form.ValidationTextBox");
+dojo.require("dijit.form.DateTextBox");
+<script>
+function subForm() {
+ dojo.io.bind({
+  url: "users.php", // 指定将form提交到哪个页面
+
+  formNode: dojo.byId("theForm"), // 指定提交哪个form
+
+  mimetype:"text/html", // 指定用什么编码方式提交
+
+  method:"POST", // 指定是post还是get,当然此处要提交,当然就要用post了
+
+  encoding:"utf-8", // 指定提交内容的编码
+
+  timeout:10000, // 指定超时时间
+
+  handle: function(type, data, evt){
+    if(type == "load") {
+       // form提交成功,并且从users.php返回了内容
+
+
+    alert(data); // data为返回的内容
+
+    }
+    else if (type == "error") {alert("页面出错了"+data); }
+    else if (type == "timeout") {alert("超时了"); }
+    else {alert("ajax出现未知异常"); }
+  }
+   });
+ }
+</script>
+</script>
+<?php  ?>
+<input id="ckBox" />

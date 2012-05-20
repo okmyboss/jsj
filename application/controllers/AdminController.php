@@ -6,19 +6,25 @@
 require_once APPLICATION_PATH . '/controllers/BaseController.php';
 require_once APPLICATION_PATH . '/models/Category.php';
 class AdminController extends BaseController{
+	
+
+	private $aa;
+	
 	function init(){
 		parent::initDb();
+		parent::init();
 		
 		$this->_helper->layout->setLayout('admin');
+		
 	}
 	public function indexAction(){
-		$cate = new Model_Category();
-		$list = $cate->getSortedList();
-		$this->view->list = $list;
-		$json = Zend_Json::encode($list);
-		//echo $json;
 		
-		$this->getResponse()->appendBody($json,"sliderbar" );
-
+		$this->render('menubar','menubar');
 	}
+	
+	public function urlAction(){
+		$this->_helper->viewRenderer->setNoRender();
+		
+	}
+	
 }

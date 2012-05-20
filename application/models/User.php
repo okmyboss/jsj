@@ -6,6 +6,9 @@ class Model_User extends Zend_Db_Table
 	protected $_name = 'user';
 	protected $_primary = 'id';
 
+	function __construct(){
+		$this->mysqli=new MYSQLI($this->host,self::$fake_user,self::$my_password,self::$my_db);
+	}
 
 	/**
 	 * 获取用户信息
